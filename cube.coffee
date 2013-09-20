@@ -85,9 +85,13 @@ $(() ->
                     [mx, my] = init_point
                     ctx.moveTo(mx, my)
                     ctx.lineTo(sx, sy)
-                    ctx.strokeStyle = "#678cb1"
+                    cc = 1.0 + (rz + prev_z) / 300
+
+                    ctx.lineWidth = 3 * cc
+                    ctx.strokeStyle = "rgba(#{103 * cc}, #{140 * cc}, #{177 * cc}, 1.0)"
                     ctx.stroke()
 
+                prev_z = rz
                 init_point = [sx, sy]
 
                 ctx.beginPath()

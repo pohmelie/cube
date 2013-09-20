@@ -27,7 +27,7 @@
       return [x * (cb * cg) + y * (-cb * sg) + z * sb, x * (sa * sb * cg + ca * sg) + y * (-sa * sb * sg + ca * cg) + z * (-sa * cb), x * (-ca * sb * cg + sa * sg) + y * (ca * sb * sg + sa * cg) + z * (ca * cb)];
     };
     iteration = function() {
-      var init_point, mx, my, path, rx, ry, rz, sx, sy, x, y, z, _i, _j, _len, _len1, _ref, _ref1;
+      var cc, init_point, mx, my, path, prev_z, rx, ry, rz, sx, sy, x, y, z, _i, _j, _len, _len1, _ref, _ref1;
       ctx.fillStyle = background;
       ctx.fillRect(0, 0, width, height);
       for (_i = 0, _len = points.length; _i < _len; _i++) {
@@ -43,9 +43,12 @@
             mx = init_point[0], my = init_point[1];
             ctx.moveTo(mx, my);
             ctx.lineTo(sx, sy);
-            ctx.strokeStyle = "#678cb1";
+            cc = 1.0 + (rz + prev_z) / 300;
+            ctx.lineWidth = 3 * cc;
+            ctx.strokeStyle = "rgba(" + (103 * cc) + ", " + (140 * cc) + ", " + (177 * cc) + ", 1.0)";
             ctx.stroke();
           }
+          prev_z = rz;
           init_point = [sx, sy];
           ctx.beginPath();
           ctx.arc(sx, sy, 3, 0, 2 * Math.PI);
